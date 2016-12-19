@@ -1,7 +1,5 @@
 package com.lucasi.llamaswithhats;
 
-import com.lucasi.llamaswithhats.items.ModItems;
-
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -9,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e) {
-        ModItems.createItems();
+
     }
 
     public void init(FMLInitializationEvent e) {

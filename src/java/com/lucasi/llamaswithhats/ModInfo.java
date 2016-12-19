@@ -14,8 +14,8 @@ public class ModInfo {
 	 public static final String RESOURCE_PREFIX = MOD_ID + ":";
 
 	 public static final String GUI_FACTORY_CLASS = "com.lucasi.llamaswithhats.gui.GuiFactoryMT";
-	 public static final String CLIENT_SIDE_PROXY_CLASS = "com.lucasi.llamaswithhats.proxy.ClientProxy";
-	 public static final String SERVER_SIDE_PROXY_CLASS = "com.lucasi.llamaswithhats.proxy.CommonProxy";
+	 public static final String CLIENT_SIDE_PROXY_CLASS = "com.lucasi.llamaswithhats.ClientProxy";
+	 public static final String SERVER_SIDE_PROXY_CLASS = "com.lucasi.llamaswithhats.ServerProxy";
 
 	 public static void PrintEntityList()
 	 {
