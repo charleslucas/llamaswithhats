@@ -1,0 +1,24 @@
+{
+    "modListVersion": 2,
+    "modList":
+    [
+        {
+          "modid": "llamaswithhats",
+          "name": "Llamas with Hats",
+          "description": "Lets you make hats for your llamas.  And... nothing else.  Really.",
+          "version": "$version",
+          "mcversion": "$mcversion",
+          "url": "",
+          "updateUrl": "",
+          "authorList": ["lucasi"],
+          "credits": "Thank you to Jason Steele and Filmcow.",
+          "logoFile": "assets/llamaswithhats/llamaswithhats_logo.png",
+          "screenshots": [],
+          "parent": "",
+          "dependents": [],
+          "dependencies": [],
+          "requiredMods": [],
+          "useDependencyInformation": false
+        }
+    ]
+}

@@ -1,5 +1,7 @@
 package com.lucasi.llamaswithhats.items;
 
+import com.lucasi.llamaswithhats.Main;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -14,6 +16,11 @@ public class ModItem extends Item {
 		setUnlocalizedName(unlocalizedName);
 		setRegistryName(unlocalizedName);
 	    setCreativeTab(CreativeTabs.MATERIALS);
+	    //setTextureName(ModInfo.MOD_ID + ":tutorialItem");  // Deprecated in 1.8 and later - need .json file
+	}
+
+	public void registerItemModel() {
+		Main.proxy.registerItemRenderer(this, 0, name);
 	}
 
 	@Override

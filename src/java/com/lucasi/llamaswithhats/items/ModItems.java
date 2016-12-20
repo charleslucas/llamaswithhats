@@ -31,9 +31,9 @@ public final class ModItems {
 //			((ItemModelProvider)item).registerItemModel(item);
 //		}
 		
-//		if (item instanceof ModItem) {
-//			((ModItem)item).registerItemModel();
-//		}
+		if (item instanceof ModItem) {
+			((ModItem)item).registerItemModel();
+		}
 
 		return item;
 	}
