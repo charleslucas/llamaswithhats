@@ -1,5 +1,6 @@
 package com.lucasi.llamaswithhats;
 
+import com.lucasi.llamaswithhats.blocks.ModBlocks;
 import com.lucasi.llamaswithhats.items.ModItems;
 
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +27,10 @@ public class Main {
 	    @EventHandler
 	    public void preInit(FMLPreInitializationEvent e) {
 	    	System.out.println(modname + " is making hats for your llamas!");
-	    	ModItems.init();  // This should be here, not in CommonProxy like shown in tutorial
+
+	    	// These should be here, not in CommonProxy like shown in tutorial
+	    	ModItems.init();
+	    	ModBlocks.init();
 	    }
 
 	    @EventHandler
