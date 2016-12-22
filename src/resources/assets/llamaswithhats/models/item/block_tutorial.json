@@ -1,5 +1,5 @@
 {
-    "parent":"llamaswithhats:block/tutorial_block",
+    "parent":"llamaswithhats:block/block_tutorial",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

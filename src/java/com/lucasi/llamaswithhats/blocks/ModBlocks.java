@@ -10,9 +10,9 @@ public class ModBlocks {
     public static ModBlock tutorialBlock;
 
     public static void init() {
-        //GameRegistry.registerBlock(tutorialBlock = new BasicBlock("tutorial_block"), "tutorial_block");
+        //GameRegistry.registerBlock(tutorialBlock = new BasicBlock("block_tutorial"), "block_tutorial");
     	
-    	tutorialBlock = register(new ModBlock("tutorialBlock", Material.ROCK));
+    	tutorialBlock = register(new ModBlock("block_tutorial", Material.ROCK));
     }
 
 	private static <T extends Block> T register(T block) {

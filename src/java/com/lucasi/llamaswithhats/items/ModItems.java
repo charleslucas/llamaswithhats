@@ -9,9 +9,9 @@ public final class ModItems {
 
     public static void init() {
     	// Original way (pre-1.8) as shown in tutorial
-    	// GameRegistry.register(tutorialItem = new ModItem("tutorial_item"), "tutorial_item");
-    	//tutorialItem = (ModItem) new ModItem("tutorial_item").setRegistryName(ModInfo.MOD_ID, "tutorial_item");
-    	tutorialItem = register(new ModItem("tutorial_item"));
+    	// GameRegistry.register(tutorialItem = new ModItem("item_tutorial"), "item_tutorial");
+    	//tutorialItem = (ModItem) new ModItem("item_tutorial").setRegistryName(ModInfo.MOD_ID, "item_tutorial");
+    	tutorialItem = register(new ModItem("item_tutorial"));
     	
     	register(tutorialItem);
     }
