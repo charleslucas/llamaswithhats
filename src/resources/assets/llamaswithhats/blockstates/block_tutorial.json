@@ -1,5 +1,13 @@
 {
-    "variants": {
-        "normal": { "model": "llamaswithhats:block_tutorial" }
+  "forge_marker": 1,
+  "defaults":
+  {
+  },
+  "variants":
+  {
+    "normal":
+    {
+      "model" : "llamaswithhats:block_tutorial"
     }
+  }
 }
