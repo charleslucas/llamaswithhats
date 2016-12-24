@@ -19,19 +19,24 @@ public class ModBlock extends Block {
       
         setUnlocalizedName(unlocalizedName);
         setRegistryName(unlocalizedName);
+        
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);  // Which creative item menu tab this shows up in
         setHardness(hardness);                         // How long it takes to mine this
         setResistance(resistance);                     // Resistance against explosions
+        setHarvestLevel("pickaxe", 1);
     }
 
+	// Constructor
     public ModBlock(String unlocalizedName, float hardness, float resistance) {
         this(unlocalizedName, Material.ROCK, hardness, resistance);
     }
 
+	// Constructor
     public ModBlock(String unlocalizedName, Material material) {
         this(unlocalizedName, material, 2.0f, 10.0f);
     }
     
+	// Constructor
     public ModBlock(String unlocalizedName) {
         this(unlocalizedName, 2.0f, 10.0f);
     }
