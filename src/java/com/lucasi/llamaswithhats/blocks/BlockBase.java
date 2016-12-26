@@ -20,7 +20,7 @@ public class BlockBase extends Block {
         setUnlocalizedName(unlocalizedName);
         setRegistryName(unlocalizedName);
         
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);  // Which creative item menu tab this shows up in
+        setCreativeTab(Main.creativeTab);  // Which creative item menu tab this shows up in
         setHardness(hardness);                         // How long it takes to mine this
         setResistance(resistance);                     // Resistance against explosions
         //setHarvestLevel("pickaxe", 1);

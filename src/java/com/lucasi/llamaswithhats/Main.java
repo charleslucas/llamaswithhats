@@ -1,11 +1,10 @@
 package com.lucasi.llamaswithhats;
 
 import com.lucasi.llamaswithhats.blocks.ModBlocks;
+import com.lucasi.llamaswithhats.client.LlamasWithHatsTab;
 import com.lucasi.llamaswithhats.items.ModItems;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -18,13 +17,15 @@ public class Main {
 	    public static final String modname = ModInfo.MOD_NAME;
 	    public static final String modversion = ModInfo.MOD_VERSION;
 
+	    public static final LlamasWithHatsTab creativeTab = new LlamasWithHatsTab();
+	    
 	    @SidedProxy(clientSide = ModInfo.CLIENT_SIDE_PROXY_CLASS, serverSide = ModInfo.SERVER_SIDE_PROXY_CLASS)
 	    public static CommonProxy proxy;
 
-	    @Instance
-	    public static Main instance = new Main();
+	    @Mod.Instance(modid)
+	    public static Main instance;
 
-	    @EventHandler
+	    @Mod.EventHandler
 	    public void preInit(FMLPreInitializationEvent e) {
 	    	System.out.println(modname + " is making hats for your llamas!");
 
@@ -33,12 +34,12 @@ public class Main {
 	    	ModBlocks.init();
 	    }
 
-	    @EventHandler
+	    @Mod.EventHandler
 	    public void init(FMLInitializationEvent e) {
 
 	    }
 
-	    @EventHandler
+	    @Mod.EventHandler
 	    public void postInit(FMLPostInitializationEvent e) {
 
 	    }

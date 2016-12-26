@@ -15,7 +15,7 @@ public class ItemBase extends Item {
 		this.name = unlocalizedName;
 		setUnlocalizedName(unlocalizedName);
 		setRegistryName(unlocalizedName);
-	    setCreativeTab(CreativeTabs.MATERIALS);
+	    setCreativeTab(Main.creativeTab);
 	    //setTextureName(ModInfo.MOD_ID + ":tutorialItem");  // Deprecated in 1.8 and later - need .json file
 	}
 

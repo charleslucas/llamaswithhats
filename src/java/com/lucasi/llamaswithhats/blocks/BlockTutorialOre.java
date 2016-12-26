@@ -7,11 +7,11 @@ import com.lucasi.llamaswithhats.items.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class BlockTutorialOre extends BlockBase {
 
-	protected String name;
-	
 	//private Item drop;
 	//private int meta;
 	//private int least_quantity;
@@ -28,7 +28,16 @@ public class BlockTutorialOre extends BlockBase {
 	
 	// ------------------------------------------------------
 	
-	@Override
+    /**
+     * Called when a player destroys this Block
+     */
+    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+    {
+    	System.out.println(name + " onBlockDestroyedByPlayer()");
+    }
+    
+    @Override
 	public Item getItemDropped(IBlockState blockstate, Random random, int fortune) {
     	System.out.println(name + " getItemDropped()");
 	    return ModItems.tutorialItem;
@@ -47,5 +56,11 @@ public class BlockTutorialOre extends BlockBase {
 	//        return this.least_quantity;
 	//    return this.least_quantity + random.nextInt(this.most_quantity - this.least_quantity + fortune + 1);
 	//}
+
+	@Override
+	//public int quantityDropped(IBlockState blockstate, int fortune, Random random) {
+    public int quantityDropped(Random random) {
+	    return 1;
+	}
 	
 }
