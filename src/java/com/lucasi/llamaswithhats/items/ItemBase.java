@@ -5,12 +5,12 @@ import com.lucasi.llamaswithhats.Main;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ModItem extends Item {
+public class ItemBase extends Item {
 	
 	protected String name;
 	
-	public ModItem(String unlocalizedName) {
-		super();
+	public ItemBase(String unlocalizedName) {
+		//super();
 
 		this.name = unlocalizedName;
 		setUnlocalizedName(unlocalizedName);
@@ -24,7 +24,7 @@ public class ModItem extends Item {
 	}
 
 	@Override
-	public ModItem setCreativeTab(CreativeTabs tab) {
+	public ItemBase setCreativeTab(CreativeTabs tab) {
 		super.setCreativeTab(tab);
 		return this;
 	}

@@ -5,15 +5,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public final class ModItems {
 
-    public static ModItem tutorialItem;
+    public static ItemBase tutorialItem;
 
     public static void init() {
     	// Original way (pre-1.8) as shown in tutorial
     	// GameRegistry.register(tutorialItem = new ModItem("item_tutorial"), "item_tutorial");
     	//tutorialItem = (ModItem) new ModItem("item_tutorial").setRegistryName(ModInfo.MOD_ID, "item_tutorial");
-    	tutorialItem = register(new ModItem("item_tutorial"));
-    	
-    	register(tutorialItem);
+    	tutorialItem = register(new ItemBase("item_tutorial"));
     }
     
 //    private static final void register(Item i) {
@@ -31,8 +29,8 @@ public final class ModItems {
 //			((ItemModelProvider)item).registerItemModel(item);
 //		}
 		
-		if (item instanceof ModItem) {
-			((ModItem)item).registerItemModel();
+		if (item instanceof ItemBase) {
+			((ItemBase)item).registerItemModel();
 		}
 
 		return item;

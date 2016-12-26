@@ -2,12 +2,19 @@
   "forge_marker": 1,
   "defaults":
   {
+    "textures": {
+        "all": "llamaswithhats:blocks/block_tutorial_ore"
+    }
   },
   "variants":
   {
     "normal":
     {
-      "model" : "llamaswithhats:block_tutorial_ore"
+      "model" : "cube_all"
+    },
+    "inventory":
+    {
+      "model" : "cube_all"
     }
   }
 }

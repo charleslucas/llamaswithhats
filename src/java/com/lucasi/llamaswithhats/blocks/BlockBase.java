@@ -7,12 +7,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 
-public class ModBlock extends Block {
+public class BlockBase extends Block {
 
 	protected String name;
 	
 	// Main Constructor
-    public ModBlock(String unlocalizedName, Material material, float hardness, float resistance) {
+    public BlockBase(String unlocalizedName, Material material, float hardness, float resistance) {
         super(material);
         
         this.name = unlocalizedName;
@@ -23,21 +23,21 @@ public class ModBlock extends Block {
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);  // Which creative item menu tab this shows up in
         setHardness(hardness);                         // How long it takes to mine this
         setResistance(resistance);                     // Resistance against explosions
-        setHarvestLevel("pickaxe", 1);
+        //setHarvestLevel("pickaxe", 1);
     }
 
 	// Constructor
-    public ModBlock(String unlocalizedName, float hardness, float resistance) {
+    public BlockBase(String unlocalizedName, float hardness, float resistance) {
         this(unlocalizedName, Material.ROCK, hardness, resistance);
     }
 
 	// Constructor
-    public ModBlock(String unlocalizedName, Material material) {
+    public BlockBase(String unlocalizedName, Material material) {
         this(unlocalizedName, material, 2.0f, 10.0f);
     }
     
 	// Constructor
-    public ModBlock(String unlocalizedName) {
+    public BlockBase(String unlocalizedName) {
         this(unlocalizedName, 2.0f, 10.0f);
     }
 
@@ -46,7 +46,7 @@ public class ModBlock extends Block {
 	}
 
 	@Override
-	public ModBlock setCreativeTab(CreativeTabs tab) {
+	public BlockBase setCreativeTab(CreativeTabs tab) {
 		super.setCreativeTab(tab);
 		return this;
 	}

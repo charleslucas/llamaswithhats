@@ -1,6 +1,0 @@
-{
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-        "all": "llamaswithhats:blocks/block_tutorial_ore"
-    }
-}
