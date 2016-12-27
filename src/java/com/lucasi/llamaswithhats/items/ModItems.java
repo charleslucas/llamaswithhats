@@ -59,6 +59,10 @@ public final class ModItems {
 			((ItemBase)item).registerItemModel();
 		}
 
+		if (item instanceof ItemArmorBase) {
+			((ItemArmorBase)item).registerItemModel();
+		}
+
 		return item;
 	}
 
