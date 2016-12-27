@@ -1,4 +1,9 @@
 < en_US.lang - English localization file for the mod Llamas with Hats >
+itemGroup.llamaswithhats=Llamas with Hats
 item.item_tutorial.name=Blue Shit
+item.wool_boots.name=Wool Boots
+item.wool_chestplate.name=Wool Chestplate
+item.wool_helmet.name=Wool Helmet
+item.wool_leggings.name=Wool Leggings
 tile.block_tutorial.name=Purple Shit
 tile.block_tutorial_ore.name=Blue Shit Ore
