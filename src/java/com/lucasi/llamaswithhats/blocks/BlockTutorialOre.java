@@ -2,7 +2,7 @@ package com.lucasi.llamaswithhats.blocks;
 
 import java.util.Random;
 
-import com.lucasi.llamaswithhats.items.ModItems;
+import com.lucasi.llamaswithhats.items.LWHItems;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -40,7 +40,7 @@ public class BlockTutorialOre extends BlockBase {
     @Override
 	public Item getItemDropped(IBlockState blockstate, Random random, int fortune) {
     	System.out.println(name + " getItemDropped()");
-	    return ModItems.tutorialItem;
+	    return LWHItems.tutorialItem;
 	}
 
 	//@Override

@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ModBlocks {
+public class LWHBlocks {
 
     public static BlockBase tutorialBlock;
     public static BlockTutorialOre tutorialOreBlock;

@@ -1,8 +1,8 @@
 package com.lucasi.llamaswithhats;
 
-import com.lucasi.llamaswithhats.blocks.ModBlocks;
+import com.lucasi.llamaswithhats.blocks.LWHBlocks;
 import com.lucasi.llamaswithhats.client.LlamasWithHatsTab;
-import com.lucasi.llamaswithhats.items.ModItems;
+import com.lucasi.llamaswithhats.items.LWHItems;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -30,8 +30,8 @@ public class Main {
 	    	System.out.println(modname + " is making hats for your llamas!");
 
 	    	// These should be here, not in CommonProxy like shown in tutorial
-	    	ModItems.init();
-	    	ModBlocks.init();
+	    	LWHItems.init();
+	    	LWHBlocks.init();
 	    }
 
 	    @Mod.EventHandler

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public final class ModItems {
+public final class LWHItems {
 	protected static int[] woolArmorDamageReductionArray = {1,3,2,1};  // Same as leather
 	protected static int   woolArmorDurability = 4;                      // Slightly less than leather
 	protected static int   woolArmorEnchantability = 20;                 // More than leather
