@@ -2,6 +2,7 @@ package com.lucasi.llamaswithhats;
 
 import com.lucasi.llamaswithhats.blocks.LWHBlocks;
 import com.lucasi.llamaswithhats.client.LlamasWithHatsTab;
+import com.lucasi.llamaswithhats.entities.LWHEntities;
 import com.lucasi.llamaswithhats.items.LWHItems;
 
 import net.minecraftforge.fml.common.Mod;
@@ -29,18 +30,30 @@ public class Main {
 	    public void preInit(FMLPreInitializationEvent e) {
 	    	System.out.println(modname + " is making hats for your llamas!");
 
-	    	// These should be here, not in CommonProxy like shown in tutorial
+	    	// Items
 	    	LWHItems.init();
+	    	
+	    	// Blocks
 	    	LWHBlocks.init();
+	    	
+	    	// Entities
+	    	LWHEntities.init();
+	        LWHEntities.registerEntities(instance);
+	        
+	        proxy.registerEntityRenders();
+
 	    }
 
 	    @Mod.EventHandler
 	    public void init(FMLInitializationEvent e) {
-
+	        proxy.registerRenders();
 	    }
 
 	    @Mod.EventHandler
 	    public void postInit(FMLPostInitializationEvent e) {
 
+	    	//ModInfo.PrintEntityList();
+	    	//ModInfo.PrintLWHEntityList();
+	    	
 	    }
 }

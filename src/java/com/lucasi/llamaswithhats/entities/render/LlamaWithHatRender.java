@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class LlamaWithHatRender extends RenderLlama
 {
-	private static final ResourceLocation LLAMA_WITH_HAT_TEXTURES = new ResourceLocation(ModInfo.RESOURCE_PREFIX + "textures/entity/entity_llama_with_hat.png");
+	private static final ResourceLocation LLAMA_WITH_HAT_TEXTURES = new ResourceLocation(ModInfo.RESOURCE_PREFIX + "textures/entity/llama_with_hat.png");
 
 	public LlamaWithHatRender(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn) {
 		super(renderManagerIn);

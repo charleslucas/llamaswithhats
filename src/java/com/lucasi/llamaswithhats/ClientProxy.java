@@ -1,5 +1,7 @@
 package com.lucasi.llamaswithhats;
 
+import com.lucasi.llamaswithhats.entities.LWHEntities;
+
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -13,6 +15,19 @@ public class ClientProxy extends CommonProxy {
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Main.modid + ":" + id, "inventory"));
 	}
 	
+    @Override
+    public void registerRenders()
+    {
+        //ModBlocks.registerRenders();
+        //ModItems.registerRenders();
+    }
+
+    @Override
+    public void registerEntityRenders()
+    {
+        LWHEntities.registerEntityRenders();
+    }
+
     @Override
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
