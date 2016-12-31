@@ -2,6 +2,7 @@ package com.lucasi.llamaswithhats;
 
 import com.lucasi.llamaswithhats.blocks.LWHBlocks;
 import com.lucasi.llamaswithhats.client.LlamasWithHatsTab;
+import com.lucasi.llamaswithhats.crafting.LWHCrafting;
 import com.lucasi.llamaswithhats.entities.LWHEntities;
 import com.lucasi.llamaswithhats.items.LWHItems;
 
@@ -47,6 +48,10 @@ public class Main {
 	    @Mod.EventHandler
 	    public void init(FMLInitializationEvent e) {
 	        proxy.registerRenders();
+
+	        // Make sure this happens after items and blocks are initialized
+	        LWHCrafting.init();
+
 	    }
 
 	    @Mod.EventHandler

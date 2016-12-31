@@ -7,3 +7,4 @@ item.wool_helmet.name=Wool Helmet
 item.wool_leggings.name=Wool Leggings
 tile.block_tutorial.name=Purple Shit
 tile.block_tutorial_ore.name=Blue Shit Ore
+entity.llamaswithhats:llama_with_hat.name=Llama with Hat (Basic)
