@@ -5,6 +5,7 @@ import com.lucasi.llamaswithhats.entities.ai.EntityAILlamaWithHatMatchUp;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILlamaFollowCaravan;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -23,8 +24,66 @@ import net.minecraft.world.World;
 public class EntityLlamaWithHat extends EntityLlama {
 
     private boolean areAdditionalTasksSet;
+    
+    private int llamawithhatType = 0;  // 0 = Undifferentiated, 1 = Paul, 2 = Carl
+    
+    public int GetType()
+    {
+    	return llamawithhatType;
+    }
 
-	public EntityLlamaWithHat(World worldIn)
+    public boolean IsPaul()
+    {
+    	if (llamawithhatType == 1) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+
+    public boolean IsCarl()
+    {
+    	if (llamawithhatType == 2) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+
+    public boolean IsUndifferentiated()
+    {
+    	if (llamawithhatType == 0) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    // Is this llamawithhat's parent/lead (current match) still a good match?
+    public boolean IsParentMatch() {
+    	return this.IsMatch(((EntityLlamaWithHat) this.func_190716_dS()).GetType());
+    }
+    
+    // Is this llamawithhat a good match to meet up and talk with
+    public boolean IsMatch(int Type) {
+    	if (this.llamawithhatType == 0 && Type == 0) {  // Undifferentiated llamas will meet with each other
+    		return true;
+    	}
+    	else if (this.llamawithhatType == 1 && Type == 2) {  // Paul will talk with Carl
+    		return true;
+    	}    	
+    	else if (this.llamawithhatType == 2 && Type == 1) {  // Carl will talk with Paul
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+
+    public EntityLlamaWithHat(World worldIn)
 	{
 		super(worldIn);
 	}
@@ -45,12 +104,11 @@ public class EntityLlamaWithHat extends EntityLlama {
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		
-		// Carl and Paul llamaswithhats find each other and pair up
-//		this.tasks.addTask(2, new EntityAILlamaFollowCaravan(this, 2.0999999046325684D));
-		this.tasks.addTask(2, new EntityAILlamaWithHatMatchUp(this, 2.0999999046325684D));
+		// Llamaswithhats find each other and pair up
+		this.tasks.addTask(2, new EntityAILlamaFollowCaravan(this, 2.0999999046325684D));
 
-		this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 40, 20.0F));
-		this.tasks.addTask(3, new EntityAIPanic(this, 1.2D));
+		this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 40, 20.0F));  // Fight
+		this.tasks.addTask(3, new EntityAIPanic(this, 1.2D));                     // Flight
 		this.tasks.addTask(4, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.0D));
         //this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.6D));
@@ -61,7 +119,8 @@ public class EntityLlamaWithHat extends EntityLlama {
 		this.tasks.addTask(8, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
 		// Watch nearest living thing
 		//this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityLiving.class, 6.0F));
-		this.tasks.addTask(9, new EntityAILookIdle(this));
+		this.tasks.addTask(9, new EntityAILlamaWithHatMatchUp(this, 2.0999999046325684D));
+		this.tasks.addTask(10, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityLlamaWithHat.AIHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityLlamaWithHat.AIDefendTarget(this));
 	}
