@@ -2,6 +2,7 @@ package com.lucasi.llamaswithhats.entities;
 
 import com.lucasi.llamaswithhats.entities.ai.EntityAILlamaWithHatMatchUp;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -18,23 +19,25 @@ import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityLlamaWithHat extends EntityLlama {
 
     private boolean areAdditionalTasksSet;
     
-    private int llamawithhatType = 0;  // 0 = Undifferentiated, 1 = Paul, 2 = Carl
+    private int lwhType = 0;  // 0 = Undifferentiated, 1 = Paul, 2 = Carl
     
     public int GetType()
     {
-    	return llamawithhatType;
+    	return lwhType;
     }
 
     public boolean IsPaul()
     {
-    	if (llamawithhatType == 1) {
+    	if (lwhType == 1) {
     		return true;
     	}
     	else {
@@ -44,7 +47,7 @@ public class EntityLlamaWithHat extends EntityLlama {
 
     public boolean IsCarl()
     {
-    	if (llamawithhatType == 2) {
+    	if (lwhType == 2) {
     		return true;
     	}
     	else {
@@ -54,7 +57,7 @@ public class EntityLlamaWithHat extends EntityLlama {
 
     public boolean IsUndifferentiated()
     {
-    	if (llamawithhatType == 0) {
+    	if (lwhType == 0) {
     		return true;
     	}
     	else {
@@ -69,13 +72,13 @@ public class EntityLlamaWithHat extends EntityLlama {
     
     // Is this llamawithhat a good match to meet up and talk with
     public boolean IsMatch(int Type) {
-    	if (this.llamawithhatType == 0 && Type == 0) {  // Undifferentiated llamas will meet with each other
+    	if (this.lwhType == 0 && Type == 0) {  // Undifferentiated llamas will meet with each other
     		return true;
     	}
-    	else if (this.llamawithhatType == 1 && Type == 2) {  // Paul will talk with Carl
+    	else if (this.lwhType == 1 && Type == 2) {  // Paul will talk with Carl
     		return true;
     	}    	
-    	else if (this.llamawithhatType == 2 && Type == 1) {  // Carl will talk with Paul
+    	else if (this.lwhType == 2 && Type == 1) {  // Carl will talk with Paul
     		return true;
     	}
     	else {
@@ -101,10 +104,11 @@ public class EntityLlamaWithHat extends EntityLlama {
     @Override
 	protected void initEntityAI()
 	{
+    	// High Priority Tasks
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2D));
 		
-		// Llamaswithhats find each other and pair up
+		// Llamaswithhats look for other llamaswithhats to form a caravan
 		this.tasks.addTask(2, new EntityAILlamaFollowCaravan(this, 2.0999999046325684D));
 
 		this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 40, 20.0F));  // Fight
@@ -116,13 +120,19 @@ public class EntityLlamaWithHat extends EntityLlama {
 		// Watch the closest LlamaWithHat
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityLlamaWithHat.class, 8.0F));
 		// Watch the closest player
-		this.tasks.addTask(8, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+		this.tasks.addTask(7, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
 		// Watch nearest living thing
-		//this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityLiving.class, 6.0F));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityLiving.class, 6.0F));
+
+		// Llamaswithhats find each other and pair up
 		this.tasks.addTask(9, new EntityAILlamaWithHatMatchUp(this, 2.0999999046325684D));
 		this.tasks.addTask(10, new EntityAILookIdle(this));
+    	// Low Priority Tasks
+
+		// High Priority TargetTasks
 		this.targetTasks.addTask(1, new EntityLlamaWithHat.AIHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityLlamaWithHat.AIDefendTarget(this));
+		// Low Priority TargetTasks
 	}
 	
     private void setAdditionalAItasks()
@@ -141,6 +151,22 @@ public class EntityLlamaWithHat extends EntityLlama {
             //}
         }
     }
+    
+	// CARL!!!
+    protected SoundEvent getCarl1Sound()
+    {
+        return SoundEvents.ENTITY_WOLF_HURT;
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    protected float getSoundVolume()
+    {
+        return 0.4F;
+    }
+
+
 
 	static class AIDefendTarget extends EntityAINearestAttackableTarget<EntityWolf>
 	{

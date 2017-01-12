@@ -39,7 +39,7 @@ public class LWHEntities {
 	                // Once registered mob eggs can be created by using minecraft:spawn_egg with NBT entry
 	                //   'entity_name' with value of the name this class is registered in the classToStringMapping with.
 	                // give @p spawn_egg 1 0 {EntityTag:{id:llamaswithhats:llama_with_hat}}
-	                EntityRegistry.registerEgg(new ResourceLocation(ModInfo.RESOURCE_PREFIX + key), 1, 2);
+	                EntityRegistry.registerEgg(new ResourceLocation(ModInfo.RESOURCE_PREFIX + key), 1, 5);
 	            }
 	        }
 	    }
