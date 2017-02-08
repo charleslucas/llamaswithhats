@@ -3,6 +3,7 @@
 	<name>llamaswithhats</name>
 	<comment></comment>
 	<projects>
+		<project>forge-1.11-13.19.1.2199-mdk</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

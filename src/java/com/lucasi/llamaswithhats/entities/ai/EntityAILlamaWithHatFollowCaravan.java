@@ -8,14 +8,14 @@ import net.minecraft.util.math.Vec3d;
 
 public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
 {
-    public EntityLlama field_190859_a;
-    private double field_190860_b;
-    private int field_190861_c;
+    public EntityLlama llama;
+    private double speedModifier;
+    private int distCheckCounter;
 
-    public EntityAILlamaWithHatFollowCaravan(EntityLlama p_i47305_1_, double p_i47305_2_)
+    public EntityAILlamaWithHatFollowCaravan(EntityLlama llamaIn, double speedModifierIn)
     {
-        this.field_190859_a = p_i47305_1_;  // This llama
-        this.field_190860_b = p_i47305_2_;  // This llama's speed
+        this.llama = llamaIn;  // This llama
+        this.speedModifier = speedModifierIn;  // This llama's speed
         this.setMutexBits(1);
     }
 
@@ -25,9 +25,9 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
     public boolean shouldExecute()
     {
     	// If not leashed and range is not NULL
-        if (!this.field_190859_a.getLeashed() && !this.field_190859_a.func_190718_dR())
+        if (!this.llama.getLeashed() && !this.llama.inCaravan())
         {
-            List<EntityLlama> list = this.field_190859_a.worldObj.<EntityLlama>getEntitiesWithinAABB(this.field_190859_a.getClass(), this.field_190859_a.getEntityBoundingBox().expand(9.0D, 4.0D, 9.0D));
+            List<EntityLlama> list = this.llama.world.<EntityLlama>getEntitiesWithinAABB(this.llama.getClass(), this.llama.getEntityBoundingBox().expand(9.0D, 4.0D, 9.0D));
             EntityLlama entityllama = null;
             double d0 = Double.MAX_VALUE;
 
@@ -35,9 +35,9 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
             for (EntityLlama entityllama1 : list)
             {
             	// If llama has parent/lead llama && does not have a child
-                if (entityllama1.func_190718_dR() && !entityllama1.func_190712_dQ())
+                if (entityllama1.inCaravan() && !entityllama1.hasCaravanTrail())
                 {
-                    double d1 = this.field_190859_a.getDistanceSqToEntity(entityllama1);
+                    double d1 = this.llama.getDistanceSqToEntity(entityllama1);
 
                     if (d1 <= d0) // Iterate until we find the closest qualified llama
                     {
@@ -54,9 +54,9 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
                 for (EntityLlama entityllama2 : list)
                 {
                 	// If leashed                 && does not have a child
-                    if (entityllama2.getLeashed() && !entityllama2.func_190712_dQ())
+                    if (entityllama2.getLeashed() && !entityllama2.hasCaravanTrail())
                     {
-                        double d2 = this.field_190859_a.getDistanceSqToEntity(entityllama2);
+                        double d2 = this.llama.getDistanceSqToEntity(entityllama2);
 
                         if (d2 <= d0) // Iterate until we find the closest qualified llama
                         {
@@ -77,14 +77,14 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
                 return false;
             }
             // If this llama is not leashed and is not part of a caravan (double-check?)
-            else if (!entityllama.getLeashed() && !this.func_190858_a(entityllama, 1))
+            else if (!entityllama.getLeashed() && !this.firstIsLeashed(entityllama, 1))
             {
                 return false;
             }
             else
             {
             	// Follow that llama!
-                this.field_190859_a.func_190715_a(entityllama);
+                this.llama.joinCaravan(entityllama);
                 return true;
             }
         }
@@ -101,24 +101,24 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
     public boolean continueExecuting()
     {
     	// If this llama has a parent/lead llama && that parent/lead llama is still alive                && that parent/lead llama is still part of a caravan
-        if (this.field_190859_a.func_190718_dR() && this.field_190859_a.func_190716_dS().isEntityAlive() && this.func_190858_a(this.field_190859_a, 0))
+        if (this.llama.inCaravan() && this.llama.getCaravanHead().isEntityAlive() && this.firstIsLeashed(this.llama, 0))
         {
         	// Get distance to parent/lead llama
-            double d0 = this.field_190859_a.getDistanceSqToEntity(this.field_190859_a.func_190716_dS());
+            double d0 = this.llama.getDistanceSqToEntity(this.llama.getCaravanHead());
 
             // If we're really far away from our parent/lead llama
             if (d0 > 676.0D)
             {
             	// If we're going slow
-                if (this.field_190860_b <= 3.0D)
+                if (this.speedModifier <= 3.0D)
                 {
-                    this.field_190860_b *= 1.2D;  // Speed up
-                    this.field_190861_c = 40;     // Start our countdown timer
+                    this.speedModifier *= 1.2D;  // Speed up
+                    this.distCheckCounter = 40;     // Start our countdown timer
                     return true;
                 }
 
                 // If we haven't caught up in 40 iterations of this
-                if (this.field_190861_c == 0)
+                if (this.distCheckCounter == 0)
                 {
                 	// Stop following
                     return false;
@@ -126,9 +126,9 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
             }
 
             // Decrement our iteration countdown timer
-            if (this.field_190861_c > 0)
+            if (this.distCheckCounter > 0)
             {
-                --this.field_190861_c;
+                --this.distCheckCounter;
             }
 
             // Keep following
@@ -146,8 +146,8 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
      */
     public void resetTask()
     {
-        this.field_190859_a.func_190709_dP();  // Clear parent and child fields
-        this.field_190860_b = 2.1D;            // Reset our speed to normal
+        this.llama.leaveCaravan();  // Clear parent and child fields
+        this.speedModifier = 2.1D;            // Reset our speed to normal
     }
 
     /**
@@ -155,20 +155,20 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
      */
     public void updateTask()
     {
-        if (this.field_190859_a.func_190718_dR())
+        if (this.llama.inCaravan())
         {
-            EntityLlama entityllama = this.field_190859_a.func_190716_dS();            // Get this llama's parent/lead llama
-            double d0 = (double)this.field_190859_a.getDistanceToEntity(entityllama);  // Distance to the parent/lead llama
+            EntityLlama entityllama = this.llama.getCaravanHead();            // Get this llama's parent/lead llama
+            double d0 = (double)this.llama.getDistanceToEntity(entityllama);  // Distance to the parent/lead llama
             float f = 2.0F;
             // Get the position of the parent/lead llama
-            Vec3d vec3d = (new Vec3d(entityllama.posX - this.field_190859_a.posX, entityllama.posY - this.field_190859_a.posY, entityllama.posZ - this.field_190859_a.posZ)).normalize().scale(Math.max(d0 - 2.0D, 0.0D));
+            Vec3d vec3d = (new Vec3d(entityllama.posX - this.llama.posX, entityllama.posY - this.llama.posY, entityllama.posZ - this.llama.posZ)).normalize().scale(Math.max(d0 - 2.0D, 0.0D));
             // Try to move to that llama's position
-            this.field_190859_a.getNavigator().tryMoveToXYZ(this.field_190859_a.posX + vec3d.xCoord, this.field_190859_a.posY + vec3d.yCoord, this.field_190859_a.posZ + vec3d.zCoord, this.field_190860_b);
+            this.llama.getNavigator().tryMoveToXYZ(this.llama.posX + vec3d.xCoord, this.llama.posY + vec3d.yCoord, this.llama.posZ + vec3d.zCoord, this.speedModifier);
         }
     }
 
     // Test if this is a valid caravan llama to follow (has a parent/lead llama or a leash)
-    private boolean func_190858_a(EntityLlama p_190858_1_, int p_190858_2_)
+    private boolean firstIsLeashed(EntityLlama p_190858_1_, int p_190858_2_)
     {
         if (p_190858_2_ > 8)
         {
@@ -176,21 +176,21 @@ public class EntityAILlamaWithHatFollowCaravan extends EntityAIBase
             return false;
         }
         // If this llama has a parent/lead
-        else if (p_190858_1_.func_190718_dR())
+        else if (p_190858_1_.inCaravan())
         {
         	// If this llama's parent is leashed
-            if (p_190858_1_.func_190716_dS().getLeashed())
+            if (p_190858_1_.getCaravanHead().getLeashed())
             {
                 return true;
             }
             else  // If this llama's parent is *not* leashed
             {
             	// Get this llama's parent/lead
-                EntityLlama entityllama = p_190858_1_.func_190716_dS();
+                EntityLlama entityllama = p_190858_1_.getCaravanHead();
                 // Increase the known length of our chain
                 ++p_190858_2_;
                 // Recursive call (limit 7 recursions) - return true if this llama's parent/lead has a parent/lead or a leash
-                return this.func_190858_a(entityllama, p_190858_2_);
+                return this.firstIsLeashed(entityllama, p_190858_2_);
             }
         }
         else // Don't follow

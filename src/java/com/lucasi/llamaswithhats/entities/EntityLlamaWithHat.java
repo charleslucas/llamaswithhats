@@ -67,7 +67,7 @@ public class EntityLlamaWithHat extends EntityLlama {
     
     // Is this llamawithhat's parent/lead (current match) still a good match?
     public boolean IsParentMatch() {
-    	return this.IsMatch(((EntityLlamaWithHat) this.func_190716_dS()).GetType());
+    	return this.IsMatch(((EntityLlamaWithHat) this.getCaravanHead()).GetType());
     }
     
     // Is this llamawithhat a good match to meet up and talk with
